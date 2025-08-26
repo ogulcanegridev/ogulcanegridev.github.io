@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oğulcan Eğri | Developer</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: white;
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Navbar (sola sabit) */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+
+    nav a{
+      width: 40px;
+      height: 40px;
+      margin: 20px;
+      padding: 0px 5px;
+      cursor: pointer;
+    }
+
+    /* Sağ üst yazı */
+    .logo {
+      position: fixed;
+      top: 15px;
+      right: 25px;
+      font-size: 18px;
+      color: #cc00ff;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Ana içerik */
+    .content {
+      margin-left: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .content h5 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #cc00ff;
+    }
+
+    .content h1 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .typing {
+      font-size: 20px;
+      color: #ccc;
+      display: inline-block;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      background: #cc00ff;
+      margin-left: 2px;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% { background: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a href="mailto:ogulcanegri09@gmail.com"><img src="Assets/Application.png" alt="icon1"></a>
+  </nav>
+
+  <!-- Sağ üstte logo -->
+  <div class="logo">OğulcanEğri.Dev</div>
+
+  <!-- İçerik -->
+  <div class="content">
+    <h5>Merhaba ben,</h5>
+    <h1>Oğulcan Eğri</h1>
+    <p class="typing" id="typing"></p><span class="cursor"></span>
+  </div>
+
+  <script>
+    const texts = ["Siber Güvenlik", "Front End Developerim"];
+    let count = 0;
+    let index = 0;
+    let currentText = "";
+    let letter = "";
+    const typingElement = document.getElementById("typing");
+
+    function type() {
+      if (count === texts.length) count = 0;
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
+
+      typingElement.textContent = letter;
+
+      if (letter.length === currentText.length) {
+        setTimeout(erase, 1500);
+      } else {
+        setTimeout(type, 120);
+      }
+    }
+
+    function erase() {
+      letter = currentText.slice(0, --index);
+      typingElement.textContent = letter;
+
+      if (letter.length === 0) {
+        count++;
+        setTimeout(type, 500);
+      } else {
+        setTimeout(erase, 60);
+      }
+    }
+
+    type();
+  </script>
+</body>
+</html>
